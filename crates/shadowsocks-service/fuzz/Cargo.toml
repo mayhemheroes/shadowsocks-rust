@@ -1,0 +1,29 @@
+[package]
+name = "shadowsocks-service-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+futures = { version = "0.3", features = ["executor"] }
+
+[dependencies.shadowsocks-service]
+path = ".."
+features = ["local-socks4"]
+
+# Prevent this from interfering with workspaces
+[workspace]
+members = ["."]
+
+[profile.release]
+debug = 1
+
+[[bin]]
+name = "handshake_request"
+path = "fuzz_targets/handshake_request.rs"
+test = false
+doc = false
