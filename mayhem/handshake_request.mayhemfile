@@ -1,0 +1,7 @@
+project: shadowsocks-rust
+target: handshake-request
+
+cmds:
+  - cmd: /handshake_request
+  - cmd: /handshake_request_no_inst @@
+    libfuzzer: false
